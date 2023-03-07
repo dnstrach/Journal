@@ -1,7 +1,7 @@
 # Journal
 
 ![AppImage](appIcon.jpg)
-![AppIcon](journalIcon.jpg)
-![Home](homeView.jpg)
-![Entry](entryview.jpg)
-![Quote](quoteView.jpg)
+![AppIcon](journalIcon.png)
+![Home](homeView.jpeg)
+![Entry](entryview.PNG)
+![Quote](quoteView.PNG)
