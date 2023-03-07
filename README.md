@@ -1,3 +1,3 @@
 # Journal
 
-[AppImage](appIcon.jpg)
+![AppImage](appIcon.jpg)
