@@ -1,5 +1,6 @@
 # Journal
 
+![App](/appIcon.png)
 ![Icon](/journalIcon.png)
-![Oil Items](/oils.png)
-![Cart](/cart.png)
+![Home](/homeView.png)
+![Entries](/entryview.png)
