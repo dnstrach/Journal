@@ -13,19 +13,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        //notification permission
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { authorized, error in
-            if let error = error {
-                print("There was an error requesting permission to show local notifications: \(error)")
-            }
-            
-            if authorized {
-                print("✅ User granted authorized to show local notifications")
-            } else {
-                print("❌ User denied authorized to show local notifications")
-            }
-        }
-        
         return true
     }
 
