@@ -4,4 +4,4 @@
 ![AppIcon](journalIcon.jpg)
 ![Home](homeView.jpg)
 ![Entry](entryview.jpg)
-![Quote](quote.jpg)
+![Quote](quoteView.jpg)
