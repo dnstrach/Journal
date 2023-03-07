@@ -1,3 +1,3 @@
 # Journal
 
-appIcon.jpg
+[AppImage](appIcon.jpg)
