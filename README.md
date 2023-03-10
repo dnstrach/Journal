@@ -3,7 +3,7 @@ Journal is an iOS mobile app designed for users to submit daily journal entries 
 
 ![AppImage](appIcon.jpg)
 ![Home](homeView.jpeg)
-![Entry](journalEntry.PNG)
+![Entry](journalEntry.jpeg)
 ![Quote](dailyQuote.PNG)
 
 Technologies
