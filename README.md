@@ -12,11 +12,8 @@ Swift, CoreData, RestAPI, UIKit
 
 Installation
 --------------
-Import CoreData 
-MVC
+Import CoreData // MVC
 
 Future Improvements
 --------------------
-CloudKit
-Sections for dates based on month and year
-Alerts for daily quote
+CloudKit // Sections for dates based on month and year // Alerts for daily quote
