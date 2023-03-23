@@ -7,7 +7,7 @@
 
 import UIKit
 
-class JournalEntryViewController: UIViewController {
+class JournalEntryViewController: UIViewController, UITextViewDelegate {
 
     //MARK: - Properties
     //landing pad from navigation segue
@@ -34,6 +34,8 @@ class JournalEntryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.gratitudeTextView.delegate = self
+        
         //if else condition to set title for adding entry view controller and updating entry view controller
         if let journalEntry = journalEntries,
            let journalEntryDate = journalEntry.journalEntryDate {
@@ -50,6 +52,11 @@ class JournalEntryViewController: UIViewController {
         textViewShadow()
         presentAlert()
         
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+        super.touchesBegan(touches, with: event)
     }
     
 

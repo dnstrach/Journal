@@ -53,7 +53,7 @@ class QuoteViewController: UIViewController {
         UIImageView.animateKeyframes(withDuration: 1.0, delay: 0.0) {
             UIImageView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 0.25, animations: {
                 image.center.x += 10.0
-                image.center.y -= 10.0
+                image.center.y -= 40.0
             })
             
             UIImageView.addKeyframe(withRelativeStartTime: 0.55, relativeDuration: 0.55) {
