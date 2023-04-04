@@ -11,7 +11,6 @@ class HomeTableViewController: UITableViewController {
 
     //MARK: - Outlets
     @IBOutlet var journalTableView: UITableView!
-    @IBOutlet weak var searchBar: UISearchBar!
     
     //MARK: - Lifecycle Methods
     override func viewDidLoad() {
