@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21513" systemVersion="22C65" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22222" systemVersion="22G90" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
     <entity name="Journal" representedClassName="Journal" syncable="YES" codeGenerationType="class">
-        <attribute name="affirmation" optional="YES" attributeType="String"/>
-        <attribute name="dailyDescription" optional="YES" attributeType="String"/>
-        <attribute name="gratitude" optional="YES" attributeType="String"/>
+        <attribute name="entryText" optional="YES" attributeType="String"/>
         <attribute name="journalEntryDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+    </entity>
+    <entity name="Sleep" representedClassName="Sleep" syncable="YES" codeGenerationType="class">
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="section" optional="YES" attributeType="Transformable"/>
+        <attribute name="sleepTime" optional="YES" attributeType="String"/>
+        <attribute name="wakeUpTime" optional="YES" attributeType="String"/>
     </entity>
 </model>

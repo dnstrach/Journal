@@ -26,14 +26,15 @@ class JournalManager {
     
     //MARK: - CRUD
     //create
-    func createJournalEntry(journalEntryDate: Date, gratitude: String, dailyDescription: String, affirmation: String) {
+    func createJournalEntry(journalEntryDate: Date, entryText: String) {
         //storing journal entry's datatype and value into journalEntry variable
-        let journalEntry = Journal(journalEntryDate: journalEntryDate, gratitude: gratitude, dailyDescription: dailyDescription, affirmation: affirmation)
+        let journalEntry = Journal(journalEntryDate: journalEntryDate, entryText: entryText)
         
         //adding created entry to source of truth
         journalEntries.append(journalEntry)
+        
         //dates sorted in descending order to be displayed in cells
-        journalEntries.sort(by: { $0.journalEntryDate ?? Date() > $1.journalEntryDate ?? Date() })
+        //journalEntries.sort(by: { $0.journalEntryDate ?? Date() > $1.journalEntryDate ?? Date() })
         
         //saving created entry to CoreData
         CoreDataStack.saveJournalContext()
@@ -48,7 +49,7 @@ class JournalManager {
         
         //dates sorted in descending order
         //Note: array must be sorted in create, retrieve and update methods for cells to be arranged in descending order
-        journalEntries.sort(by: { $0.journalEntryDate ?? Date() > $1.journalEntryDate ?? Date() })
+        //journalEntries.sort(by: { $0.journalEntryDate ?? Date() > $1.journalEntryDate ?? Date() })
         
         //source of truth = fetched and sorted array
         self.journalEntries = journalEntries
@@ -56,15 +57,12 @@ class JournalManager {
     }
     
     //update
-    func updateJournalEntry(journalEntry: Journal, journalEntryDate: Date, gratitude: String, dailyDescription: String, affirmation: String) {
-        //updated journal entry with specific datatype/value stored into variable
+    func updateJournalEntry(journalEntry: Journal, journalEntryDate: Date, entryText: String) {
         journalEntry.journalEntryDate = journalEntryDate
-        journalEntry.gratitude = gratitude
-        journalEntry.dailyDescription = dailyDescription
-        journalEntry.affirmation = affirmation
+        journalEntry.entryText = entryText
         
         //dates sorted in descending order
-        journalEntries.sort(by: { $0.journalEntryDate ?? Date() > $1.journalEntryDate ?? Date() })
+        //journalEntries.sort(by: { $0.journalEntryDate ?? Date() > $1.journalEntryDate ?? Date() })
         
         //saving updated entry to CoreData
         CoreDataStack.saveJournalContext()

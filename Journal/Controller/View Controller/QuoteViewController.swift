@@ -10,7 +10,6 @@ import UIKit
 class QuoteViewController: UIViewController {
 
     //MARK: - Outlets
-    @IBOutlet weak var riverImage: UIImageView!
     @IBOutlet weak var quoteLabel: UILabel!
     
     //MARK: Lifecycle Methods
@@ -27,10 +26,6 @@ class QuoteViewController: UIViewController {
     }
     
     
-    @IBAction func quoteButton(_ sender: Any) {
-        riverFlowsOffScreen(image: riverImage)
-    }
-    
     //MARK: - Helper Methods
     //fetching quote with fetchQuote completion handler
     private func fetchQuote() {
@@ -44,21 +39,6 @@ class QuoteViewController: UIViewController {
                 QuoteManager().saveQuote(quote: quote)
             case .failure(let error):
                 print("Error: \(error)")
-            }
-        }
-    }
-    
-    func riverFlowsOffScreen(image: UIImageView) {
-        let center = image.center
-        UIImageView.animateKeyframes(withDuration: 1.0, delay: 0.0) {
-            UIImageView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 0.25, animations: {
-                image.center.x += 10.0
-                image.center.y -= 40.0
-            })
-            
-            UIImageView.addKeyframe(withRelativeStartTime: 0.55, relativeDuration: 0.55) {
-                image.center = center
-                image.alpha = 1.0
             }
         }
     }

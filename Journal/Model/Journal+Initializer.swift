@@ -10,12 +10,11 @@ import CoreData
 extension Journal {
     
     
-    convenience init(context: NSManagedObjectContext = CoreDataStack.journalContext, journalEntryDate: Date, gratitude: String, dailyDescription: String, affirmation: String) {
+    convenience init(context: NSManagedObjectContext = CoreDataStack.journalContext, journalEntryDate: Date, entryText: String) {
         self.init(context: context)
         self.journalEntryDate = journalEntryDate
-        self.gratitude = gratitude
-        self.dailyDescription = dailyDescription
-        self.affirmation = affirmation
+        self.entryText = entryText
+
     }
     
 }

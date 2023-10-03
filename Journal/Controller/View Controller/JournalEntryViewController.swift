@@ -24,57 +24,64 @@ class JournalEntryViewController: UIViewController, UITextViewDelegate {
     }
     
     //MARK: - Outlets
+    
     @IBOutlet weak var datePicker: UIDatePicker!
-    @IBOutlet weak var gratitudeTextView: UITextView!
-    @IBOutlet weak var dailyDescriptionTextView: UITextView!
-    @IBOutlet weak var affirmationTextView: UITextView!
-    @IBOutlet weak var treeImage: UIImageView!
+    @IBOutlet weak var entryTextView: UITextView!
+//    @IBOutlet weak var dailyDescriptionTextView: UITextView!
+//    @IBOutlet weak var affirmationTextView: UITextView!
+//    @IBOutlet weak var treeImage: UIImageView!
     
     //MARK: - Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.gratitudeTextView.delegate = self
+       // self.tabBarController?.tabBar.isHidden = true
+        
+        self.entryTextView.delegate = self
         
         //if else condition to set title for adding entry view controller and updating entry view controller
         if let journalEntry = journalEntries,
            let journalEntryDate = journalEntry.journalEntryDate {
-            title = "Journal Entry"
             //updating journal entry but have already created entry details saved in date picker and text views
             datePicker.date = journalEntryDate
-            gratitudeTextView.text = journalEntry.gratitude
-            dailyDescriptionTextView.text = journalEntry.dailyDescription
-            affirmationTextView.text = journalEntry.affirmation
-        } else {
-            title = "Add Journal Entry"
-        }
+            entryTextView.text = journalEntry.entryText
+
+        } 
         
         textViewShadow()
         presentAlert()
+        //customizeDatePicker()
         
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.view.endEditing(true)
-        super.touchesBegan(touches, with: event)
-    }
+//    func textViewDidBeginEditing(_ textView: UITextView) {
+//        entryTextView.text = nil
+//    }
+//    
+//    func customizeDatePicker() {
+//        datePicker.backgroundColor = .clear
+//    }
+//    
+//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        self.view.endEditing(true)
+//        super.touchesBegan(touches, with: event)
+//    }
     
 
     //MARK: - Actions
     @IBAction func saveButtonTapped(_ sender: Any) {
         
-        guard let gratitude = gratitudeTextView.text,
-              let dailyDescription = dailyDescriptionTextView.text,
-              let affirmation = affirmationTextView.text else { return }
+        guard let entryText = entryTextView.text else { return }
+        
         
         //not included in guard because journalEntryDate has a default value
         let journalEntryDate = datePicker.date
           
         //saving button will either update or create journal entry
         if let journalEntry = journalEntries {
-            JournalManager.shared.updateJournalEntry(journalEntry: journalEntry, journalEntryDate: journalEntryDate, gratitude: gratitude, dailyDescription: dailyDescription, affirmation: affirmation)
+            JournalManager.shared.updateJournalEntry(journalEntry: journalEntry, journalEntryDate: journalEntryDate, entryText: entryText)
         } else {
-            JournalManager.shared.createJournalEntry(journalEntryDate: journalEntryDate, gratitude: gratitude, dailyDescription: dailyDescription, affirmation: affirmation)
+            JournalManager.shared.createJournalEntry(journalEntryDate: journalEntryDate, entryText: entryText)
         }
         
         //dismiss nav controller after tapping save
@@ -82,31 +89,16 @@ class JournalEntryViewController: UIViewController, UITextViewDelegate {
     }
     
     
-    
-    @IBAction func datePickerTapped(_ sender: Any) {
-        treeImage.shake()
-    }
-    
     //MARK: - Helper Methods
     
     func textViewShadow() {
         
-        gratitudeTextView.layer.shadowColor = UIColor(red: 0.00, green: 0.00, blue: 0.00, alpha: 1.0).cgColor
-        gratitudeTextView.layer.shadowOpacity = 0.25
-        gratitudeTextView.layer.shadowOffset = CGSize(width: 8, height: 8)
-        gratitudeTextView.layer.shadowRadius = 0
-        
-        dailyDescriptionTextView.layer.shadowColor = UIColor(red: 0.00, green: 0.00, blue: 0.00, alpha: 1.0).cgColor
-        dailyDescriptionTextView.layer.shadowOpacity = 0.25
-        
-        dailyDescriptionTextView.layer.shadowOffset = CGSize(width: 8, height: 8)
-        dailyDescriptionTextView.layer.shadowRadius = 0
-        
-        affirmationTextView.layer.shadowColor = UIColor(red: 0.00, green: 0.00, blue: 0.00, alpha: 1.0).cgColor
-        affirmationTextView.layer.shadowOpacity = 0.25
-        
-        affirmationTextView.layer.shadowOffset = CGSize(width: 8, height: 8)
-        affirmationTextView.layer.shadowRadius = 0
+        entryTextView.layer.shadowColor = UIColor(named: "DarkGrayPurple")?.cgColor
+        entryTextView.layer.shadowOffset = CGSize(width: -4.0, height: 4.0)
+        entryTextView.layer.shadowRadius = 3.0
+        entryTextView.layer.shadowOpacity = 1.0
+        entryTextView.layer.masksToBounds = false
+        entryTextView.layer.cornerRadius = 20
     }
     
     func presentAlert() {
