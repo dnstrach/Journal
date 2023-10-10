@@ -7,6 +7,8 @@
 
 import CoreData
 
+//test
+
 class JournalManager {
     
     //MARK: - Properties
@@ -45,7 +47,7 @@ class JournalManager {
     func fetchJournalEntries() {
         //storing journal entries already created, updated or deleted to be fetched from CoreData into journalEntries variable
         //fetch function throws an error therefore using try option with nil coalescing empty array to be displayed in case of fetch error
-        var journalEntries = (try? CoreDataStack.journalContext.fetch(self.journalFetchRequest)) ?? []
+        let journalEntries = (try? CoreDataStack.journalContext.fetch(self.journalFetchRequest)) ?? []
         
         //dates sorted in descending order
         //Note: array must be sorted in create, retrieve and update methods for cells to be arranged in descending order

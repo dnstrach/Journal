@@ -14,6 +14,8 @@ class JournalEntryViewController: UIViewController, UITextViewDelegate {
     var journalEntries: Journal?
     let seenWarningModalKey = "seenWarningModal"
     
+    let viewContext = CoreDataStack.journalContext
+    
     //computed property to track wether or not the user has seen warning alert by saving bool value into user defaults
     var userHasSeenModal: Bool {
         set {
