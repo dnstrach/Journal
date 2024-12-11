@@ -1,7 +1,7 @@
 # Journal
 Journal is an iOS mobile app designed for users to submit daily journal entries and receive a daily quote. Since the data is saved locally in CoreData, a warning alert appears once when first downloading the app, to warn users that entries will not be saved after deleting the app. Animations appear in two views to create nature-like movements in graphics. 
 
-![AppImage](appIcon.jpg)
+![AppImage](![appIcon](https://github.com/user-attachments/assets/8b1eb21e-3be5-4ad6-8744-8df0dc2ef574))
 ![Home](homeView.jpeg)
 ![Entry](journalEntry.jpeg)
 ![Quote](dailyQuote.PNG)
