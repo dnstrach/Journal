@@ -1,19 +1,2 @@
 # Journal
-Journal is an iOS mobile app designed for users to submit daily journal entries and receive a daily quote. Since the data is saved locally in CoreData, a warning alert appears once when first downloading the app, to warn users that entries will not be saved after deleting the app. Animations appear in two views to create nature-like movements in graphics. 
-
-![AppImage](appIcon.jpg)
-![Home](JournalEntry.png)
-![Entry](journalEntry.jpeg)
-![Quote](dailyQuote.PNG)
-
-Technologies
---------------
-Swift, CoreData, RestAPI, UIKit
-
-Installation
---------------
-Import CoreData // MVC
-
-Future Improvements
---------------------
-CloudKit // Sections for dates based on month and year // Alerts for daily quote
+## Conscious Journal is a mobile journaling app designed for users to practice gratitude and connect with their inner conscious. Key features include search functionality, date filtering, and daily motivational quotes. 
