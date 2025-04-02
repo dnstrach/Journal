@@ -1,19 +1,18 @@
-# Journal
-### Conscious Journal is a mobile journaling app designed for users to practice gratitude and connect with their inner conscious. Key features include search functionality, date filtering, and daily motivational quotes. 
+# [Journal](https://apps.apple.com/us/app/conscious-journal/id6446703762)
+Conscious Journal is a mobile journaling app designed for users to practice gratitude and connect with their inner consciousness. Key features include search functionality, date filtering, and daily motivational quotes. Check out my [portfolio](https://dominiquestrachan.squarespace.com) to see features.
 
+# MVC
 
+# UIKit
 
-## MVC
-<img width="167" alt="Screenshot 2024-12-06 at 3 51 04 PM" src="https://github.com/user-attachments/assets/351c1007-3277-4b99-b7e8-0eb8d04da476" />
+# User Defaults
 
-## User Defaults
-
-## Core Data
+# Core Data
 CRUD
 
-## NSFetchedResultsController 
+# NSFetchedResultsController 
 Search
 
-## Restful API
+# Restful API
 
-## Future Improvements
+# Improvements
