@@ -5,7 +5,7 @@ Conscious Journal is a mobile journaling app designed for users to practice grat
 ## Journal
 
 ### Model
-The Journal entity is made from the Core Data Model editor with entryText, journalDateString, journalEntryDate, monthSection, and monthYearString as String and Date types. 
+The Journal entity class is made from the Core Data Model editor with entryText, journalDateString, journalEntryDate, monthSection, and monthYearString as String and Date data types. 
 
 ### Model Controller
 The JournalManager is a singleton class containing CRUD methods when a user creates, reads, updates, and deletes a journal entry. The class initializes a journal fetch request of type NSFetchRequest to access sorting features inside table view.  Its extention contains Date type conversion methods to strings to be read for table view sections and searches. Sections are determined by month and year date components. Dates can be searched by short date style and month year date format. 
@@ -23,7 +23,7 @@ The helper methods present an initial alert and enable UITapGestureRecognizer to
 
 The extension conforms to UITextViewDelegate and hides the placeholder text once the user begins typing on the keyboard. When the keyboard shows, the UITextView will scroll up to avoid text from being typed behind the keyboard based on contentInset and verticalScrollIndicatorInsets properties. The keyboard will hide once the user taps outside the UITextView which enables it to scroll back to its original offset based on contentInset, verticalScrollIndicatorInsets, and contentOffset properties.
 
-##Quote
+## Quote
 
 ### Model
 The Quote entity class is defined with quote and author properties as String data types and coding keys to be decoded from from the [Zen Quotes API](https://zenquotes.io/).
