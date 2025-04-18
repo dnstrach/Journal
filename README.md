@@ -23,6 +23,57 @@ The helper methods present an initial alert and enable UITapGestureRecognizer to
 
 The extension conforms to UITextViewDelegate and hides the placeholder text once the user begins typing on the keyboard. When the keyboard shows, the UITextView will scroll up to avoid text from being typed behind the keyboard based on contentInset and verticalScrollIndicatorInsets properties. The keyboard will hide once the user taps outside the UITextView which enables it to scroll back to its original offset based on contentInset, verticalScrollIndicatorInsets, and contentOffset properties.
 
+##Quote
+
+### Model
+The Quote entity class is defined with quote and author properties as String data types and coding keys to be decoded from from the [Zen Quotes API](https://zenquotes.io/).
+
+### Controller
+The QuoteManager struct constructs the API’s url and fetches a quote. The struct contains properties including a singleton, baseURL which converts the URL string to locate the API’s resource, and a todayComponent to be appended to the resource’s path.  The fetchQuote helper method is a network call that uses a completion closure that will return a result of type Quote or NetworkError. NetworkError is defined by an enum that conforms to the Error protocol with 5 cases and a computed property. The computed property returns an optional error message for each case. The invalidData case requires a String input that will access the localized error description. 
+```
+enum NetworkError: Error {
+    
+    case baseURLError
+    case builtURLError
+    case invalidData(String)
+    case noData
+    case statusCode
+    case unableToDecode
+    
+    var errorDescription: String? {
+        switch self {
+        case .baseURLError:
+            return "Unable to reach the server due to invalid URL"
+        case .builtURLError:
+           return "Unable to reach the server due to invalid built URL"
+        case .invalidData:
+            return "Data error from API call"
+        case .noData:
+            return "The server responded with no data"
+        case .statusCode:
+           return "Status code error"
+        case .unableToDecode:
+            return "Unable to decode data"
+        }
+        
+    }
+    
+}
+```
+The HTTP GET request is loaded with URLRequest. Data from the request is retrieved with URLSession’s dataTask completion handler which accesses the data, response, and error. If the response status code is 200 then the nested JSON object will be decoded with a do try catch statement. 
+```
+https://zenquotes.io/api/today
+
+[
+    {
+        "q": "Still your waters.",
+        "a": "Josh Waitzkin",
+        "h": "<blockquote>&ldquo;Still your waters.&rdquo; &mdash; <footer>Josh Waitzkin</footer></blockquote>"
+    }
+]
+
+```
+
 # UIKit
 
 # User Defaults
