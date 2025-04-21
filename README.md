@@ -8,6 +8,7 @@ Conscious Journal is a mobile journaling app designed for users to practice grat
 The Journal entity class is made from the Core Data Model editor with entryText, journalDateString, journalEntryDate, monthSection, and monthYearString as String and Date data types. 
 
 ### Model Controller
+**JournalManagerr**<br>
 The JournalManager is a singleton class containing CRUD methods when a user creates, reads, updates, and deletes a journal entry. The class initializes a journal fetch request of type NSFetchRequest to access sorting features inside table view.  Its extention contains Date type conversion methods to strings to be read for table view sections and searches. Sections are determined by month and year date components. Dates can be searched by short date style and month year date format. 
 
 ### View Controller
@@ -28,7 +29,8 @@ The extension conforms to UITextViewDelegate and hides the placeholder text once
 ### Model
 The Quote entity class is defined with quote and author properties as String data types and coding keys to be decoded from from the [Zen Quotes API](https://zenquotes.io/).
 
-### Controller
+### Model Controller
+**QuoteManager**<br>
 The QuoteManager struct constructs the API’s url and fetches a quote. The struct contains properties including a singleton, baseURL which converts the URL string to locate the API’s resource, and a todayComponent to be appended to the resource’s path. The fetchQuote helper method is a network call containing a callback closure parameter that will return Void. The closure asynchronously delivers a Result of type Quote or NetworkError. NetworkError is defined by an enum that conforms to the Error protocol with 5 cases and a computed property. The computed property returns an optional error message for each case. The invalidData case requires a String input that will access the localized error description. 
 ```
 enum NetworkError: Error {
@@ -60,7 +62,11 @@ enum NetworkError: Error {
     
 }
 ```
-The HTTP GET request is loaded with URLRequest. Data from the request is retrieved with URLSession’s dataTask completion handler. The .resume() method is attached to the completion handler to start the network call. The dataTask(with:completionHandler:) accesses data, response, and error. If the response status code is 200, then the nested Quote JSON object will be decoded with a do try catch statement.  
+The HTTP GET request is loaded with URLRequest. Data from the request is retrieved with URLSession’s dataTask completion handler. The .resume() method is attached to the completion handler to start the network call. The dataTask(with:completionHandler:) accesses data, response, and error. If the response status code is 200, then the nested Quote JSON object will be decoded with a do try catch statement. 
+
+### View Controller
+**QuoteViewController**<br>
+The QuoteViewController is a subclass of UIViewController containing a UILabel, UIButton, and a fetchQuote() helper method. In storyboard, the view controller is presented modally with a segue attached to a button inside the HomeTableViewController’s navigation bar. The UILabel displays the quote and the UIButton dismisses the view. The helper method calls the fetchQuote method from QuoteManager and handles the Result with a switch statement. If the Result is a success case then the quote label will be assigned to a String interpolated with the quote and author properties. If the result is a failure case then there will be an error print statment.
 
 # UIKit
 
