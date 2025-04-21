@@ -29,7 +29,7 @@ The extension conforms to UITextViewDelegate and hides the placeholder text once
 The Quote entity class is defined with quote and author properties as String data types and coding keys to be decoded from from the [Zen Quotes API](https://zenquotes.io/).
 
 ### Controller
-The QuoteManager struct constructs the API’s url and fetches a quote. The struct contains properties including a singleton, baseURL which converts the URL string to locate the API’s resource, and a todayComponent to be appended to the resource’s path.  The fetchQuote helper method is a network call that uses a completion closure that will return a result of type Quote or NetworkError. NetworkError is defined by an enum that conforms to the Error protocol with 5 cases and a computed property. The computed property returns an optional error message for each case. The invalidData case requires a String input that will access the localized error description. 
+The QuoteManager struct constructs the API’s url and fetches a quote. The struct contains properties including a singleton, baseURL which converts the URL string to locate the API’s resource, and a todayComponent to be appended to the resource’s path. The fetchQuote helper method is a network call containing a callback closure parameter that will return Void. The closure asynchronously delivers a Result of type Quote or NetworkError. NetworkError is defined by an enum that conforms to the Error protocol with 5 cases and a computed property. The computed property returns an optional error message for each case. The invalidData case requires a String input that will access the localized error description. 
 ```
 enum NetworkError: Error {
     
@@ -60,7 +60,7 @@ enum NetworkError: Error {
     
 }
 ```
-The HTTP GET request is loaded with URLRequest. Data from the request is retrieved with URLSession’s dataTask completion handler which accesses the data, response, and error. If the response status code is 200 then the nested JSON object will be decoded with a do try catch statement. 
+The HTTP GET request is loaded with URLRequest. Data from the request is retrieved with URLSession’s dataTask completion handler. The .resume() method is attached to the completion handler to start the network call. The dataTask(with:completionHandler:) accesses data, response, and error. If the response status code is 200, then the nested Quote JSON object will be decoded with a do try catch statement.  
 
 # UIKit
 
