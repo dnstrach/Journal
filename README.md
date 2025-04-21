@@ -61,18 +61,6 @@ enum NetworkError: Error {
 }
 ```
 The HTTP GET request is loaded with URLRequest. Data from the request is retrieved with URLSession’s dataTask completion handler which accesses the data, response, and error. If the response status code is 200 then the nested JSON object will be decoded with a do try catch statement. 
-```
-https://zenquotes.io/api/today
-
-[
-    {
-        "q": "Still your waters.",
-        "a": "Josh Waitzkin",
-        "h": "<blockquote>&ldquo;Still your waters.&rdquo; &mdash; <footer>Josh Waitzkin</footer></blockquote>"
-    }
-]
-
-```
 
 # UIKit
 
@@ -85,5 +73,17 @@ CRUD
 Search
 
 # Restful API
+```
+https://zenquotes.io/api/today
+
+[
+    {
+        "q": "Still your waters.",
+        "a": "Josh Waitzkin",
+        "h": "<blockquote>&ldquo;Still your waters.&rdquo; &mdash; <footer>Josh Waitzkin</footer></blockquote>"
+    }
+]
+
+```
 
 # Improvements
