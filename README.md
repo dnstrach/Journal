@@ -69,6 +69,18 @@ The HTTP GET request is loaded with URLRequest. Data from the request is retriev
 The QuoteViewController is a subclass of UIViewController containing a UILabel, UIButton, and a fetchQuote() helper method. In storyboard, the view controller is presented modally with a segue attached to a button inside the HomeTableViewController’s navigation bar. The UILabel displays the quote and the UIButton dismisses the view. The helper method calls the fetchQuote method from QuoteManager and handles the Result with a switch statement. If the Result is a success case then the quote label will be assigned to a String interpolated with the quote and author properties. If the result is a failure case then there will be an error print statment.
 
 # UIKit
+### HomeTableViewController
+**UIButton**<br> 
+The left navigation bar button is labeled with a system image that contains a segue in storyboard to present the QuoteViewController. 
+
+**UIButton**<br>
+The right navigation bar button is labeled with a system image that contains a segue in storyboard to present the JournalEntryViewController.  
+
+**UISearchBar**<br>
+The search bar is located below the navigation bar. HomeTableViewController conforms to UISearchBarDelegate to implement searches based on journal entry date predicates. Date types are converted to String types to format NSPredicates. 
+
+**UITableView**<br>
+Table view cells contain a short dateStyle title and “EEEE” dateFormat subtitle. Each cell contains a segue coded programatically to identify the Journal object’s indexPath and pass the object to the JournalEntryViewController. 
 
 # User Defaults
 
