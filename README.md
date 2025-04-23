@@ -17,6 +17,7 @@ The HomeTableViewController class is a subclass of UITableViewController contain
 
 There’s an extension that conforms to NSFetchedResultsControllerDelegate to reload and make changes to the table view when cells are inserted, deleted, and updated with a fade animation. The UISearchBar filters journal entries by NSPredicates formatted by short DateStyle and month-year DateFormat. When tapping the search bar, a cancel button will appear to delete the search text and reload the table view. When the user starts typing, an x button will show and apply the same action. Lastly, each table view row contains a segue that identifies the cell's index path to show the journal object inside the JournalEntryDetailView.
 
+
 **JournalEntryViewController**<br>
 The JournalEntryViewController class is a subclass of UIViewController containing a UIDatePicker, UITextView, and UILabel. The lifecycle methods customize the UITextView’s cornerRadius and tintColor when the view loads. In addition, the UILabel is hidden if its text is not empty and assigned to a placeholder value. The view’s original content’s inset and offset will be determined by the UITextView’s contentInset and contentOffset properties. When the view appears and disappears, the NotificationCenter will notify and subscribe keyboard observers. The action method will create and update the journal entry when the user taps on the save UIButton. 
 
