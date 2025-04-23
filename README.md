@@ -115,6 +115,7 @@ The quote label is assigned after the network call to show the quote of the day 
 The image is from assets and shown for design purposes. 
 
 # User Defaults
+User Defaults is used to store a Boolean value to show a one-time alert inside the JournalEntryViewController. The presentAlert() method initializes the UIAlertController class to create a warning message saying, “Once app is deleted, journal entries will not be saved” and sets the key to be true.
 
 # Core Data
 CRUD
