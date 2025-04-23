@@ -80,7 +80,7 @@ The right navigation bar button is labeled with a system image that contains a s
 The search bar is located below the navigation bar. HomeTableViewController conforms to UISearchBarDelegate to implement searches based on journal entry date predicates. Date types are converted to String types to format NSPredicates. 
 
 **UITableView**<br>
-Table view cells contain a short dateStyle title and “EEEE” dateFormat subtitle. Each cell contains a segue coded programatically to identify the Journal object’s indexPath and pass the object to the JournalEntryViewController. 
+Table view cells contain a short dateStyle title and “EEEE” dateFormat subtitle. Each cell contains a segue coded programatically to identify the Journal object’s indexPath and pass the object to the JournalEntryViewController.<br><br> 
 
 ### JournalEntryViewController
 **UIDatePicker**<br>
