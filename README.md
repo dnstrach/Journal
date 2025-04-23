@@ -82,6 +82,28 @@ The search bar is located below the navigation bar. HomeTableViewController conf
 **UITableView**<br>
 Table view cells contain a short dateStyle title and “EEEE” dateFormat subtitle. Each cell contains a segue coded programatically to identify the Journal object’s indexPath and pass the object to the JournalEntryViewController. 
 
+### JournalEntryViewController
+**UIDatePicker**<br>
+The date picker is located below the navigation bar and assigns the Date to journalEntryDate and monthSection properties. 
+
+**UITextView**<br>
+The text view is located below the date picker and assigns a String to the entryText property. Its cornerRadius and tintColor are coded programmatically, and the font is assigned in storyboard. 
+
+**UILabel**<br>
+The label is located inside the text view and is a placeholder label. The label will be hidden when the user begins typing. 
+
+**UITapGestureRecognizer**<br>
+A tap gesture recognizer is added to this view to dismiss the keyboard when the user taps outside the text view. 
+
+**UIEdgeInsets**<br>
+The text view’s edge insets add padding to its vertical scroll indicator insets to avoid text being typed behind the keyboard. 
+
+**CGPoint**<br>
+The text view’s origin point is used to store its original position, so it will scroll up to the initial view when the keyboard hides.
+
+**UIButton**<br>
+The right navigation bar button is labeled with a system image that is coded programmatically with an @IBAction attribute. The button triggers a save action for the Journal object to be either saved or updated. 
+
 # User Defaults
 
 # Core Data
