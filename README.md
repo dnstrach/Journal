@@ -80,9 +80,9 @@ The right navigation bar button is labeled with a system image that contains a s
 The search bar is located below the navigation bar. HomeTableViewController conforms to UISearchBarDelegate to implement searches based on journal entry date predicates. Date types are converted to String types to format NSPredicates. 
 
 **UITableView**<br>
-Table view cells contain a short dateStyle title and “EEEE” dateFormat subtitle. Each cell contains a segue coded programatically to identify the Journal object’s indexPath and pass the object to the JournalEntryViewController.<br><br> 
+Table view cells contain a short dateStyle title and “EEEE” dateFormat subtitle. Each cell contains a segue coded programatically to identify the Journal object’s indexPath and pass the object to the JournalEntryViewController.
 
-### JournalEntryViewController
+<br><br>  ### JournalEntryViewController
 **UIDatePicker**<br>
 The date picker is located below the navigation bar and assigns the Date to journalEntryDate and monthSection properties. 
 
@@ -103,6 +103,16 @@ The text view’s origin point is used to store its original position, so it wil
 
 **UIButton**<br>
 The right navigation bar button is labeled with a system image that is coded programmatically with an @IBAction attribute. The button triggers a save action for the Journal object to be either saved or updated. 
+
+<br><br> ### QuoteViewController
+**UIButton**<br>
+The button is located towards the top leading corner of the view and labeled with a system image. Its action is coded programmatically with an @IBAction attribute to dismiss the modal view. 
+
+**UILabel**<br>
+The quote label is assigned after the network call to show the quote of the day and its author. 
+
+**UIImage**<br>
+The image is from assets and shown for design purposes. 
 
 # User Defaults
 
