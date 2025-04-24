@@ -115,10 +115,60 @@ The image is from assets and shown for design purposes.
 User Defaults is used to store a Boolean value to show a one-time alert inside the JournalEntryViewController. The presentAlert() method initializes the UIAlertController class to create a warning message saying, “Once app is deleted, journal entries will not be saved” and sets the key to be true.
 
 # Core Data
-CRUD
+### Model
+The Journal entity is structured from Core Data’s Data Model template. 
 
-# NSFetchedResultsController 
-Search
+![data model](https://github.com/user-attachments/assets/a8416cf8-6f2a-4a6c-9b5e-d1c224bfa613)
+
+### CoreDataStack
+The CoreDataStack and save logic is coded with an enum rather than the AppDelegate for separation of concerns, cleaner code, and reusability. Using an enum with static properties instead of a class creates a lightweight singleton. 
+
+```
+enum CoreDataStack {
+    static let journalContainer: NSPersistentContainer = {
+        let journalContainer = NSPersistentContainer(name: "Journal")
+
+        journalContainer.loadPersistentStores { storeDescription, error in
+            if let error = error {
+                fatalError("Error loading persistent stores \(error)")
+            }
+        }
+        return journalContainer
+    }()
+
+    static var journalContext: NSManagedObjectContext { journalContainer.viewContext }
+
+    static func saveJournalContext() {
+        if journalContext.hasChanges {
+            do {
+                try journalContext.save()
+            } catch {
+                NSLog("Error saving context \(error)")
+            }
+        }
+    }
+}
+
+// referencing instance
+CoreDataStack.journalContainer
+CoreDataStack.journalContext
+
+// versus
+
+class CoreDataStack { static let shared = CoreDataStack() }
+
+// referencing instance
+let stack = CoreDataStack.shared
+stack.journalContainer
+stack.journalContext
+
+```
+
+### Journal initializer 
+The Journal entity is initialized inside an extension with a convenience initializer for customization and to avoid repetitive boilerplate code when creating a new Journal. The initializer contains a context property of type NSManagedObjectContext since the app will need repetitive access to the container when saving changes.
+
+### JournalManager
+The JournalManager class contains CRUD methods. Rather than fetching Journal objects with a source of truth array, journal entries are fetched with NSFecthRequest. When creating and updating Journal, CoreDataStack.saveJournalContext() method is called to identify changes in the NSManagedObjectContext and store persistent data into the NSPersistentContainer. To delete a Journal, the NSManagedObjectContext calls its delete method.
 
 # Restful API
 ```
