@@ -9,7 +9,7 @@ The Journal entity class is made from the Core Data Model editor with entryText,
 
 ### Model Controller
 **JournalManagerr**<br>
-The JournalManager is a singleton class containing CRUD methods for when a user creates, reads, updates, and deletes a journal entry. The class initializes a journal fetch request of type NSFetchRequest to access sorting features inside the table view.  Its extension contains Date type conversion methods to strings to be read for table view sections and searches. Sections are determined by the month and year date components. Dates can be searched by short date style and month year date format. 
+The JournalManager is a singleton class containing CRUD methods for when a user creates, reads, updates, and deletes a journal entry. The class initializes a journal fetch request of type NSFetchRequest to access sorting features inside the table view.  Its extension contains Date type conversion methods to strings to be read for table view sections and searches. Sections are determined by the month and year date components. Dates can be searched by short dateStyle and month year dateFormat. 
 
 ### View Controller
 **HomeTableViewController**<br>
