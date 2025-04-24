@@ -13,16 +13,16 @@ The JournalManager is a singleton class containing CRUD methods for when a user 
 
 ### View Controller
 **HomeTableViewController**<br>
-The HomeTableViewController class is a subclass of UITableViewController containing a UITableView and a UISearchBar. In storyboard, a right bar button item contains a segue to show the JournalEntryViewController. The helper methods construct table view sections and cells, design, and search filters. Journal entries are fetched by NSFetchedResultsController, managed by NSManagedObjectContext, and sorted in descending order by NSSortDescriptor. The navigation bar contains a custom UIFont for the app title. When the user scrolls, the navigation bar’s tintColor will change. The sections are grouped by month and year and are displayed with a custom UIFont and tintColor. Each cell also contains a title (short DateStyle) and subtitle (day of the week) with custom UIfonts and UIcolors. To delete a cell, the user swipes left with UISwipeActionsConfiguration. The UIContextualAction determines when the cell is deleted, and the delete button has a custom UIColor with the backgroundColor property.
+The HomeTableViewController class is a subclass of UITableViewController containing a UITableView and a UISearchBar. Journal entries are fetched by NSFetchedResultsController, managed by NSManagedObjectContext, and sorted in descending order by NSSortDescriptor. When the user scrolls, the navigation bar’s tintColor will change. The sections are grouped by month and year and are displayed with a custom UIFont and tintColor. Each cell contains a title (short DateStyle) and subtitle (day of the week) with custom UIfonts and UIcolors. To delete a cell, the user swipes left with UISwipeActionsConfiguration. The UIContextualAction determines when the cell is deleted, and the delete button has a custom UIColor with the backgroundColor property.
 
-There’s an extension that conforms to NSFetchedResultsControllerDelegate to reload and make changes to the table view when cells are inserted, deleted, and updated with a fade animation. The UISearchBar filters journal entries by NSPredicates formatted by short DateStyle and month-year DateFormat. When tapping the search bar, a cancel button will appear to delete the search text and reload the table view. When the user starts typing, an x button will show and apply the same action. Lastly, each table view row contains a segue that identifies the cell's index path to show the journal object inside the JournalEntryDetailView.
+There’s an extension conforming to NSFetchedResultsControllerDelegate to reload and make changes to the table view when cells are inserted, deleted, and updated with a fade animation. The UISearchBar filters journal entries by NSPredicates formatted by short DateStyle and month-year DateFormat. When tapping the search bar, a cancel button will appear to delete the search text and reload the table view. When the user starts typing, an x button will show and apply the same action. Lastly, each table view row contains a segue that identifies the cell's index path to show the journal object inside the JournalEntryDetailView.
 <br>
 **JournalEntryViewController**<br>
-The JournalEntryViewController class is a subclass of UIViewController containing a UIDatePicker, UITextView, and UILabel. The lifecycle methods customize the UITextView’s cornerRadius and tintColor when the view loads. In addition, the UILabel is hidden if its text is not empty and assigned to a placeholder value. The view’s original content’s inset and offset will be determined by the UITextView’s contentInset and contentOffset properties. When the view appears and disappears, the NotificationCenter will notify and subscribe keyboard observers. The action method will create and update the journal entry when the user taps on the save UIButton. 
+The JournalEntryViewController class is a subclass of UIViewController containing a UIDatePicker, UITextView, UILabel, and UIButton. The lifecycle methods customize the UITextView’s cornerRadius and tintColor when the view loads. In addition, the UILabel is hidden when the text view is empty and assigned to a placeholder value. The view’s original content’s inset and offset will be determined by the UITextView’s contentInset and contentOffset properties. When the view appears and disappears, the NotificationCenter will notify and subscribe keyboard observers. ContentInset and verticalScrollIndicatorInsets are adjusted based on the keyboard. The action method will create and/or update the journal entry when the user taps the save button. 
 
-The helper methods present an initial alert and enable UITapGestureRecognizer to determine when the user is done typing and to dismiss the keyboard. 
+The helper methods present an initial alert and enable UITapGestureRecognizer. The tap gesture recognizer will determine when the user is done typing and dismiss the keyboard. 
 
-The extension conforms to UITextViewDelegate and hides the placeholder text once the user begins typing on the keyboard. When the keyboard shows, the UITextView will scroll up to avoid text from being typed behind the keyboard based on contentInset and verticalScrollIndicatorInsets properties. The keyboard will hide once the user taps outside the UITextView, which enables it to scroll back to its original offset based on contentInset, verticalScrollIndicatorInsets, and contentOffset properties.
+The extension conforms to UITextViewDelegate and hides the placeholder label once the user begins typing inside the text view. When the keyboard shows, padding will be added to the bottom of UITextView's contentInset and verticalScrollIndicatorInsets to avoid text from being typed behind the keyboard based on the height of the keyboard. When the keyboard hides, the UITextView will scroll up to its original position based on contentInset and contentOffset properties.
 
 ## Quote
 
@@ -66,7 +66,7 @@ The HTTP GET request is loaded with URLRequest. Data from the request is retriev
 
 ### View Controller
 **QuoteViewController**<br>
-The QuoteViewController is a subclass of UIViewController containing a UILabel, UIButton, and a fetchQuote() helper method. In storyboard, the view controller is presented modally with a segue attached to a button inside the HomeTableViewController’s navigation bar. The UILabel displays the quote and the UIButton dismisses the view. The helper method calls the fetchQuote method from QuoteManager and handles the Result with a switch statement. If the Result is a success case then the quote label will be assigned to a String interpolated with the quote and author properties. If the result is a failure case then there will be an error print statment.
+The QuoteViewController is a subclass of UIViewController containing a UILabel, UIButton, and a fetchQuote() helper method. In storyboard, the view controller is presented modally with a segue attached to a button inside the HomeTableViewController’s navigation bar. The UILabel is assigned to the quote property, and the UIButton dismisses the modal view. The helper method calls the fetchQuote method from QuoteManager and handles the Result with a switch statement. If the Result is a success case, then the quote label will be assigned to a String interpolated with the quote and author properties. If the result is a failure case, then there will be an error print statement.
 
 # UIKit
 ### HomeTableViewController
@@ -96,10 +96,7 @@ The label is located inside the text view and is a placeholder label. The label 
 A tap gesture recognizer is added to this view to dismiss the keyboard when the user taps outside the text view. 
 
 **UIEdgeInsets**<br>
-The text view’s edge insets add padding to its vertical scroll indicator insets to avoid text being typed behind the keyboard. 
-
-**CGPoint**<br>
-The text view’s origin point is used to store its original position, so it will scroll up to the initial view when the keyboard hides.
+The text view’s edge insets contain bottom padding to avoid text being typed behind the keyboard. 
 
 **UIButton**<br>
 The right navigation bar button is labeled with a system image that is coded programmatically with an @IBAction attribute. The button triggers a save action for the Journal object to be either saved or updated.<br><br> 
