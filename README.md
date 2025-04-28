@@ -27,7 +27,7 @@ The extension conforms to UITextViewDelegate and hides the placeholder label onc
 ## Quote
 
 ### Model
-The Quote entity class is defined with quote and author properties as String data types and coding keys to be decoded from the [Zen Quotes API](https://zenquotes.io/).
+The Quote entity class is defined with quote and author properties as String data types and coding keys to be decoded from the JSON object.
 
 ### Model Controller
 **QuoteManager**<br>
@@ -173,8 +173,11 @@ The JournalManager class contains CRUD methods. Rather than fetching Journal obj
 ### HomeTableViewController
 The HomeTableViewController class manages the fetched journal entries with NSFetchedResultsController. To initialize NSFetchedResultsController, the class requires the NSFetchRequest, NSManagedObjectContext, an optional String for sectionNameKeyPath, and an optional String for cacheName. The fetched data is sorted using NSSortDescriptor based on the journalEntryDate and monthSection properties. Since the fetch request is of type NSFetchRequest, the data can then be read and modified with the .sortDescriptor computed property to sort cells with the given descriptor. In addition, the table view class must conform to NSFetchedResultsControllerDelegate to update the table view when data changes.
 
-# Restful API
+# REST API
+The[Zen Quotes API](https://zenquotes.io/) is integrated with Conscious Journal to fetch a daily quote. A new quote is generated each day at 10:00 pm PDT. It does not require an API key.
+
 ```
+// HTTP GET request
 https://zenquotes.io/api/today
 
 [
@@ -188,3 +191,4 @@ https://zenquotes.io/api/today
 ```
 
 # Improvements
+Future improvements include storing the fetched quote in the app's cache instead of making a call each time. Also, adding a daily push notification to read today's quote.
