@@ -165,10 +165,13 @@ stack.journalContext
 ```
 
 ### Journal initializer 
-The Journal entity is initialized inside an extension with a convenience initializer for customization and to avoid repetitive boilerplate code when creating a new Journal. The initializer contains a context property of type NSManagedObjectContext since the app will need repetitive access to the container when saving changes.
+The journal entity is initialized inside an extension with a convenience initializer for customization to avoid repetitive boilerplate code when creating a new Journal. The initializer contains a context property of type NSManagedObjectContext to centralize access to the container when saving changes.
 
 ### JournalManager
-The JournalManager class contains CRUD methods. Rather than fetching Journal objects with a source of truth array, journal entries are fetched with NSFecthRequest. When creating and updating Journal, CoreDataStack.saveJournalContext() method is called to identify changes in the NSManagedObjectContext and store persistent data into the NSPersistentContainer. To delete a Journal, the NSManagedObjectContext calls its delete method.
+The JournalManager class contains CRUD methods. Rather than fetching Journal objects with a source of truth array, journal entries are fetched with NSFetchRequest. When creating and updating Journal, the CoreDataStack.saveJournalContext() method is called to identify changes in the NSManagedObjectContext and store persistent data into the NSPersistentContainer. To delete a Journal, the NSManagedObjectContext calls its delete method.
+
+### HomeTableViewController
+The HomeTableViewController class manages the fetched journal entries with NSFetchedResultsController. To initialize NSFetchedResultsController, the class requires the NSFetchRequest, NSManagedObjectContext, an optional String for sectionNameKeyPath, and an optional String for cacheName. The fetched data is sorted using NSSortDescriptor based on the journalEntryDate and monthSection properties. Since the fetch request is of type NSFetchRequest, the data can then be read and modified with the .sortDescriptor computed property to sort cells with the given descriptor. In addition, the table view class must conform to NSFetchedResultsControllerDelegate to update the table view when data changes.
 
 # Restful API
 ```
