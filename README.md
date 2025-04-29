@@ -191,4 +191,4 @@ https://zenquotes.io/api/today
 ```
 
 # Improvements
-Future improvements include storing the fetched quote in the app's cache instead of making a call each time. Also, adding a daily push notification to read today's quote.
+Future improvements include storing the fetched quote in the app's cache instead of making a call each time. Also, implementing daily push notifications to read today's quote.
