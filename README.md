@@ -5,10 +5,10 @@ Conscious Journal is a mobile journaling app designed for users to practice grat
 ## Journal
 
 ### Model
-The Journal entity is made from a Core Data model with entryText, journalDateString, journalEntryDate, monthSection, and monthYearString attributes as String and Date types. The journalDateString and monthYearString are converted to Strings from the journalEntryDate property to be formatted as NSPredicates and search journal entries by date. The monthSection Date property is assigned to month and year components, where the day is the first day of the month, so that table view sections can be grouped in ascending order by month and year.  
+The Journal entity is made from the CoreData model editor with entryText, journalDateString, journalEntryDate, monthSection, and monthYearString attributes as String and Date types. The journalDateString and monthYearString are converted to Strings from the journalEntryDate property to be formatted as NSPredicates and search journal entries by date. The monthSection Date property is assigned to month and year components, where the day is the first day of the month, so that table view sections can be grouped in ascending order by month and year.  
 
 ### Model Controller
-**JournalManagerr**<br>
+**JournalManager**<br>
 The JournalManager is a singleton class containing CRUD methods for when a user creates, reads, updates, and deletes a journal entry. The class initializes a journal fetch request of type NSFetchRequest to access sorting features inside the table view. Its extension contains Date type conversion methods to strings to be read for table view sections and searches. Sections are determined by the month and year date components. Dates can be searched by short dateStyle and month year dateFormat. 
 
 ### View Controller
