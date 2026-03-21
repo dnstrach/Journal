@@ -18,7 +18,6 @@
 		D81BB04A29AF1B1A0089257A /* Quote.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81BB04929AF1B1A0089257A /* Quote.swift */; };
 		D81BB04C29AF1B330089257A /* JournalManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81BB04B29AF1B330089257A /* JournalManager.swift */; };
 		D81BB04E29AF1B870089257A /* QuoteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81BB04D29AF1B870089257A /* QuoteManager.swift */; };
-		D81BB05029AF1BAF0089257A /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81BB04F29AF1BAF0089257A /* Extensions.swift */; };
 		D81BB05229AF1BCD0089257A /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81BB05129AF1BCD0089257A /* NetworkError.swift */; };
 		D81BB05629AF1C3B0089257A /* HomeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81BB05529AF1C3B0089257A /* HomeTableViewController.swift */; };
 		D81BB05829AF1CBF0089257A /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81BB05729AF1CBF0089257A /* DateFormatter.swift */; };
@@ -41,7 +40,6 @@
 		D81BB04929AF1B1A0089257A /* Quote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quote.swift; sourceTree = "<group>"; };
 		D81BB04B29AF1B330089257A /* JournalManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalManager.swift; sourceTree = "<group>"; };
 		D81BB04D29AF1B870089257A /* QuoteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteManager.swift; sourceTree = "<group>"; };
-		D81BB04F29AF1BAF0089257A /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		D81BB05129AF1BCD0089257A /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		D81BB05529AF1C3B0089257A /* HomeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewController.swift; sourceTree = "<group>"; };
 		D81BB05729AF1CBF0089257A /* DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
@@ -124,7 +122,6 @@
 			children = (
 				D81BB03929AF17E90089257A /* Info.plist */,
 				D81BB03429AF17E90089257A /* Assets.xcassets */,
-				D81BB04F29AF1BAF0089257A /* Extensions.swift */,
 				D81BB05129AF1BCD0089257A /* NetworkError.swift */,
 				D81BB05729AF1CBF0089257A /* DateFormatter.swift */,
 			);
@@ -232,7 +229,6 @@
 			files = (
 				D81BB05829AF1CBF0089257A /* DateFormatter.swift in Sources */,
 				D81BB02929AF17E70089257A /* AppDelegate.swift in Sources */,
-				D81BB05029AF1BAF0089257A /* Extensions.swift in Sources */,
 				D81BB02B29AF17E70089257A /* SceneDelegate.swift in Sources */,
 				D81BB03329AF17E70089257A /* Journal.xcdatamodeld in Sources */,
 				D81BB05C29AF1F3B0089257A /* QuoteViewController.swift in Sources */,
