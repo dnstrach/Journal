@@ -1,5 +1,19 @@
 # [Journal](https://apps.apple.com/us/app/conscious-journal/id6446703762)
-Conscious Journal is a mobile journaling app designed for users to practice gratitude and connect with their inner consciousness. Key features include search functionality, date filtering, and daily motivational quotes. Check out my [portfolio](https://dominiquestrachan.squarespace.com) to see features.
+Conscious Journal is a UIKit-based journaling app that allows users to create, search, and organize entries with persistent storage using Core Data.
+
+## Tech Stack
+- Swift, UIKit
+- Core Data (NSPersistentContainer, NSManagedObjectContext)
+- NSFetchedResultsController
+- REST API (ZenQuotes)
+- MVC Architecture
+
+## Key Features
+- Create, edit, and delete journal entries (Core Data)
+- Search and filter entries by date using NSPredicate
+- Organized entries by month and year sections
+- Daily motivational quotes via REST API
+- Smooth table updates using NSFetchedResultsController
 
 # MVC
 ## Journal
