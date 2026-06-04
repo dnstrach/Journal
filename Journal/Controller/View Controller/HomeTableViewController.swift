@@ -46,6 +46,9 @@ class HomeTableViewController: UITableViewController, UISearchBarDelegate {
         view.addGestureRecognizer(tapGesture)
 
         navBarSetup()
+        
+        // Change search bar cursor color
+        searchBar.tintColor = UIColor(named: "DarkGrayPurple")
 
         JournalManager.shared.fetchJournalEntries()
 
