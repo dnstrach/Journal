@@ -8,69 +8,88 @@
 import Foundation
 
 class QuoteManager {
+    // MARK: - Properties
     
-    //MARK: - Properties
-   //shared instance
-   static let shared = QuoteManager()
+    /// Shared singleton instance
+    static let shared = QuoteManager()
     
+    /// Base API URL
     let baseURL = URL(string: "https://zenquotes.io/")
+    
+    /// API path components
     let apiComponent = "api"
     let todayComponent = "today"
-    let userDefaultKey = "quote"
     
-    //MARK: - Helper Methods
-    //fetching quote from API call which will either result in quote data object (quote and author) or network error
-    //Network errors are defined in resource file
-    func fetchQuote(completion: @escaping(Result<Quote, NetworkError>) -> Void) {
+    /// UserDefaults keys
+    let userDefaultKey = "quote"
+    let quoteDateKey = "quoteDate"
+    
+    // MARK: - Network Methods
+    
+    /// Fetches quote from API
+    func fetchQuote(completion: @escaping (Result<Quote, NetworkError>) -> Void) {
         
-        //safe guarding baseURL
+        // Ensure base URL exists
         guard var url = baseURL else {
             completion(.failure(.baseURLError))
             return
         }
         
-        //adding endpoints to baseURL
+        // Build URL:
+        // https://zenquotes.io/api/today
         url.append(path: apiComponent)
         url.append(path: todayComponent)
         
-        //finalizing added components
-        let components = URLComponents(url: url, resolvingAgainstBaseURL: true)
+        let components = URLComponents(
+            url: url,
+            resolvingAgainstBaseURL: true
+        )
         
-        //safe guarding built URL
         guard let builtURL = components?.url else {
-            return completion(.failure(.builtURLError))
+            completion(.failure(.builtURLError))
+            return
         }
         
-        //URL request for HTTP request and headers - not using header because API key not required
         let request = URLRequest(url: builtURL)
         
-        //checking built URL 
-        print("[QuoteController] - \(#function) built: \(builtURL.description)")
+        print("[QuoteManager] Built URL: \(builtURL.absoluteString)")
         
-        //encoding/decoding data with URL request
         URLSession.shared.dataTask(with: request) { data, response, error in
+            
+            // Handle network errors
             if let error = error {
                 completion(.failure(.invalidData(error.localizedDescription)))
                 return
             }
             
-            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+            // Ensure successful response
+            guard let response = response as? HTTPURLResponse,
+                  response.statusCode == 200 else {
                 completion(.failure(.statusCode))
                 return
             }
             
-            guard let data = data else { return completion(.failure(.noData))}
+            // Ensure data exists
+            guard let data = data else {
+                completion(.failure(.noData))
+                return
+            }
             
             do {
-                //decoding JSON object held in array
-                let quotes = try JSONDecoder().decode([Quote].self, from: data)
                 
-                //saving first quote object in [quotes] to be displayed
+                // API returns an array of quotes
+                let quotes = try JSONDecoder().decode(
+                    [Quote].self,
+                    from: data
+                )
+                
                 guard let firstQuote = quotes.first else {
                     completion(.failure(.unableToDecode))
                     return
                 }
+                
                 completion(.success(firstQuote))
+                
             } catch {
                 print(error)
                 completion(.failure(.unableToDecode))
@@ -79,29 +98,77 @@ class QuoteManager {
         }.resume()
     }
     
-    //saving encoded quote of the day into user defaults
+    // MARK: - UserDefaults Methods
+    
+    /// Saves quote and fetch date to UserDefaults
     func saveQuote(quote: Quote) {
+        
         do {
             let data = try JSONEncoder().encode(quote)
             
-            UserDefaults.standard.set(data, forKey: userDefaultKey)
+            // Save quote
+            UserDefaults.standard.set(
+                data,
+                forKey: userDefaultKey
+            )
+            
+            // Save current date
+            UserDefaults.standard.set(
+                Date(),
+                forKey: quoteDateKey
+            )
+            
         } catch {
-            print("Unable to Encode Quote (\(error)")
+            print("Unable to Encode Quote (\(error))")
         }
     }
     
-    //fetching decoded quote to be displayed from user defaults
-    func fetchQuote() -> Quote? {
-        if let data = UserDefaults.standard.data(forKey: userDefaultKey) {
-            do {
-                let quote = try JSONDecoder().decode(Quote.self, from: data)
-                return quote
-            } catch {
-                print("Unable to Decode Quote (\(error)")
-            }
+    /// Fetches saved quote from UserDefaults
+    func fetchSavedQuote() -> Quote? {
+        
+        guard let data = UserDefaults.standard.data(
+            forKey: userDefaultKey
+        ) else {
+            return nil
         }
         
-        //must return nil since Quote is optional
-        return nil
+        do {
+            let quote = try JSONDecoder().decode(
+                Quote.self,
+                from: data
+            )
+            
+            return quote
+            
+        } catch {
+            print("Unable to Decode Quote (\(error))")
+            return nil
+        }
     }
+    
+    /// Returns true if a quote has already been fetched today
+    func hasQuoteForToday() -> Bool {
+        
+        guard let savedDate = UserDefaults.standard.object(
+            forKey: quoteDateKey
+        ) as? Date else {
+            return false
+        }
+        
+        return Calendar.current.isDateInToday(savedDate)
+    }
+    
+    /// Optional helper if you ever want to force refresh
+    func clearSavedQuote() {
+        
+        UserDefaults.standard.removeObject(
+            forKey: userDefaultKey
+        )
+        
+        UserDefaults.standard.removeObject(
+            forKey: quoteDateKey
+        )
+    }
+    
 }
+
