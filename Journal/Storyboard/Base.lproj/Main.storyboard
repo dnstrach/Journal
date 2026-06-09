@@ -56,13 +56,13 @@
                     <navigationItem key="navigationItem" id="LgQ-ak-zTd">
                         <barButtonItem key="backBarButtonItem" title="Back" id="GOX-bc-fDh"/>
                         <barButtonItem key="leftBarButtonItem" title="Item" image="quote.bubble.fill" catalog="system" style="plain" id="8wl-nw-FfD">
-                            <color key="tintColor" name="Default"/>
+                            <color key="tintColor" name="NavBar"/>
                             <connections>
                                 <segue destination="2Fb-a8-eRp" kind="presentation" modalPresentationStyle="pageSheet" id="Hg9-cy-d9C"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Item" image="pencil.line" catalog="system" style="plain" id="Hu1-1G-wsD">
-                            <color key="tintColor" name="Default"/>
+                            <color key="tintColor" name="NavBar"/>
                             <connections>
                                 <segue destination="vKN-Wf-eod" kind="show" identifier="toNewJournalEntry" id="1Ta-gR-0nH"/>
                             </connections>
@@ -89,20 +89,21 @@
                                 <rect key="frame" x="0.0" y="74" width="28" height="34"/>
                                 <color key="tintColor" name="QuoteText"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="x.circle.fill" catalog="system"/>
+                                <buttonConfiguration key="configuration" style="plain" image="x.circle.fill" catalog="system">
+                                    <color key="baseForegroundColor" name="xbutton"/>
+                                </buttonConfiguration>
                                 <connections>
                                     <action selector="xButtonTapped:" destination="2Fb-a8-eRp" eventType="touchUpInside" id="Ia0-E2-feS"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="Wol-uD-pt0">
+                                <rect key="frame" x="186.66666666666666" y="386" width="20" height="20"/>
+                            </activityIndicatorView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WPR-wZ-cbr">
                                 <rect key="frame" x="75" y="183" width="243" height="0.0"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="32"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="Wol-uD-pt0">
-                                <rect key="frame" x="186" y="386" width="20" height="20"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="XfT-Ij-vtT"/>
                         <color key="backgroundColor" name="GrayPurple "/>
@@ -110,7 +111,9 @@
                             <constraint firstItem="WPR-wZ-cbr" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="XfT-Ij-vtT" secondAttribute="leading" id="1Ze-Z9-yZc"/>
                             <constraint firstItem="XfT-Ij-vtT" firstAttribute="trailing" secondItem="WPR-wZ-cbr" secondAttribute="trailing" constant="75" id="2qm-bD-bKl"/>
                             <constraint firstItem="Dd0-IL-Y1N" firstAttribute="top" secondItem="XfT-Ij-vtT" secondAttribute="top" constant="15" id="3Cu-E7-MMS"/>
+                            <constraint firstItem="Wol-uD-pt0" firstAttribute="centerX" secondItem="WPR-wZ-cbr" secondAttribute="centerX" id="O6s-Y1-JjG"/>
                             <constraint firstItem="WPR-wZ-cbr" firstAttribute="top" secondItem="Dd0-IL-Y1N" secondAttribute="bottom" constant="75" id="Vz0-4l-ZIa"/>
+                            <constraint firstItem="Wol-uD-pt0" firstAttribute="centerY" secondItem="WPR-wZ-cbr" secondAttribute="centerY" constant="213" id="brX-o1-lvn"/>
                             <constraint firstItem="WPR-wZ-cbr" firstAttribute="centerX" secondItem="XfT-Ij-vtT" secondAttribute="centerX" id="qgC-iT-g4F"/>
                             <constraint firstItem="XfT-Ij-vtT" firstAttribute="trailing" secondItem="Dd0-IL-Y1N" secondAttribute="trailing" constant="365" id="uIN-yJ-hkr"/>
                             <constraint firstItem="Dd0-IL-Y1N" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="XfT-Ij-vtT" secondAttribute="leading" id="uob-Xs-7gT"/>
@@ -120,6 +123,7 @@
                     <connections>
                         <outlet property="activityIndicator" destination="Wol-uD-pt0" id="ofJ-Kl-xqi"/>
                         <outlet property="quoteLabel" destination="WPR-wZ-cbr" id="eoj-Ae-Ngo"/>
+                        <outlet property="xButton" destination="Dd0-IL-Y1N" id="dNy-ay-uPB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6aq-xj-8gC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -213,17 +217,20 @@
         <namedColor name="DarkGrayPurple">
             <color red="0.38823529411764707" green="0.37647058823529411" blue="0.41176470588235292" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
-        <namedColor name="Default">
-            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-        </namedColor>
         <namedColor name="GrayPurple ">
             <color red="0.64313725490196083" green="0.63137254901960782" blue="0.6588235294117647" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="LightGrayPurple">
             <color red="0.64313725490196083" green="0.63137254901960782" blue="0.6588235294117647" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <namedColor name="NavBar">
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="QuoteText">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="xbutton">
+            <color red="0.99999994039535522" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

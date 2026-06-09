@@ -13,6 +13,8 @@ class QuoteViewController: UIViewController {
 
     @IBOutlet weak var quoteLabel: UILabel!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var xButton: UIButton!
+    
 
     // MARK: - Lifecycle Methods
 
@@ -21,6 +23,7 @@ class QuoteViewController: UIViewController {
 
         configureSheet()
         configureQuoteLabel()
+        configureXButton()
 
         if QuoteManager.shared.hasQuoteForToday(),
            let savedQuote = QuoteManager.shared.fetchSavedQuote() {
@@ -106,6 +109,24 @@ class QuoteViewController: UIViewController {
         )
 
         quoteLabel.attributedText = attributedText
+    }
+    
+    private func configureXButton() {
+        let symbolConfig = UIImage.SymbolConfiguration(
+            pointSize: 24,
+            weight: .bold
+        )
+
+        let image = UIImage(
+            systemName: "x.circle.fill",
+            withConfiguration: symbolConfig
+        )
+
+        xButton.setImage(image, for: .normal)
+        xButton.tintColor = .label
+
+        xButton.widthAnchor.constraint(equalToConstant: 44).isActive = true
+        xButton.heightAnchor.constraint(equalToConstant: 44).isActive = true
     }
 
     /// Shows a simple error message if the API request fails
