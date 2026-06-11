@@ -55,13 +55,13 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="LgQ-ak-zTd">
                         <barButtonItem key="backBarButtonItem" title="Back" id="GOX-bc-fDh"/>
-                        <barButtonItem key="leftBarButtonItem" title="Item" image="quote.bubble.fill" catalog="system" style="plain" id="8wl-nw-FfD">
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="quote.bubble.fill" catalog="system" id="8wl-nw-FfD">
                             <color key="tintColor" name="NavBar"/>
                             <connections>
                                 <segue destination="2Fb-a8-eRp" kind="presentation" modalPresentationStyle="pageSheet" id="Hg9-cy-d9C"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="pencil.line" catalog="system" style="plain" id="Hu1-1G-wsD">
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="pencil.line" catalog="system" id="Hu1-1G-wsD">
                             <color key="tintColor" name="NavBar"/>
                             <connections>
                                 <segue destination="vKN-Wf-eod" kind="show" identifier="toNewJournalEntry" id="1Ta-gR-0nH"/>

@@ -239,7 +239,7 @@ class JournalEntryViewController: UIViewController, UITextViewDelegate {
 
         let button = UIButton(type: .system)
 
-        var configuration = UIButton.Configuration.plain()
+        var configuration = UIButton.Configuration.filled()
         configuration.title = title
         configuration.baseForegroundColor = UIColor.label
         configuration.baseBackgroundColor = .clear
