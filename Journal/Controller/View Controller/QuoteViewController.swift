@@ -14,8 +14,8 @@ class QuoteViewController: UIViewController {
     @IBOutlet weak var quoteLabel: UILabel!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var xButton: UIButton!
+    @IBOutlet weak var randomQuoteButton: UIButton!
     
-
     // MARK: - Lifecycle Methods
 
     override func viewDidLoad() {
@@ -23,6 +23,7 @@ class QuoteViewController: UIViewController {
 
         configureSheet()
         configureQuoteLabel()
+        configureRandomQuoteButton()
         configureXButton()
 
         if QuoteManager.shared.hasQuoteForToday(),
@@ -32,6 +33,8 @@ class QuoteViewController: UIViewController {
             startLoading()
             fetchQuoteFromAPI()
         }
+        
+        activityIndicator.hidesWhenStopped = true
     }
 
     // MARK: - Actions
@@ -39,7 +42,13 @@ class QuoteViewController: UIViewController {
     @IBAction func xButtonTapped(_ sender: Any) {
         dismiss(animated: true)
     }
-
+    
+    
+    @IBAction func randomQuoteButtonTapped(_ sender: Any) {
+        startLoading()
+        fetchRandomQuoteFromAPI()
+    }
+    
     // MARK: - Helper Methods
 
     private func fetchQuoteFromAPI() {
@@ -72,21 +81,21 @@ class QuoteViewController: UIViewController {
         activityIndicator.stopAnimating()
         activityIndicator.isHidden = true
 
+        randomQuoteButton.isEnabled = true
+      //  randomQuoteButton.setTitle("New Quote", for: .normal)
+
         quoteLabel.isHidden = false
 
-        // Full text shown in the label
         let quoteText = """
         “\(quote.quote)”
 
         — \(quote.author)
         """
 
-        // Controls spacing between lines
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .center
         paragraphStyle.lineSpacing = 10
 
-        // Style the entire quote label
         let attributedText = NSMutableAttributedString(
             string: quoteText,
             attributes: [
@@ -96,7 +105,6 @@ class QuoteViewController: UIViewController {
             ]
         )
 
-        // Style the author differently from the quote
         let authorText = "— \(quote.author)"
         let authorRange = (quoteText as NSString).range(of: authorText)
 
@@ -118,7 +126,7 @@ class QuoteViewController: UIViewController {
         )
 
         let image = UIImage(
-            systemName: "x.circle.fill",
+            systemName: "xmark",
             withConfiguration: symbolConfig
         )
 
@@ -133,6 +141,9 @@ class QuoteViewController: UIViewController {
     private func showErrorMessage() {
         activityIndicator.stopAnimating()
         activityIndicator.isHidden = true
+
+        randomQuoteButton.isEnabled = true
+        randomQuoteButton.setTitle("New Quote", for: .normal)
 
         quoteLabel.isHidden = false
         quoteLabel.textAlignment = .center
@@ -164,5 +175,34 @@ class QuoteViewController: UIViewController {
 
         // Prevents text from shrinking too small
         quoteLabel.adjustsFontSizeToFitWidth = false
+    }
+    
+    private func fetchRandomQuoteFromAPI() {
+        QuoteManager.shared.fetchRandomQuote { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let quote):
+                    QuoteManager.shared.saveQuote(quote: quote)
+                    self.showQuote(quote)
+
+                case .failure(let error):
+                    print("Random quote error: \(error)")
+                    self.showErrorMessage()
+                }
+            }
+        }
+    }
+    
+    private func configureRandomQuoteButton() {
+        var config = UIButton.Configuration.plain()
+
+        config.title = "New Quote"
+        config.image = UIImage(systemName: "arrow.clockwise")
+        config.imagePlacement = .trailing
+        config.imagePadding = 6
+        config.baseForegroundColor = .secondaryLabel
+
+        randomQuoteButton.configuration = config
+       // randomQuoteButton.tintColor = .label
     }
 }

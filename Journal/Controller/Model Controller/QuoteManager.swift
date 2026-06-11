@@ -19,6 +19,7 @@ class QuoteManager {
     /// API path components
     let apiComponent = "api"
     let todayComponent = "today"
+    let randomComponent = "random"
     
     /// UserDefaults keys
     let userDefaultKey = "quote"
@@ -168,6 +169,58 @@ class QuoteManager {
         UserDefaults.standard.removeObject(
             forKey: quoteDateKey
         )
+    }
+    
+    func fetchRandomQuote(completion: @escaping (Result<Quote, NetworkError>) -> Void) {
+        guard var url = baseURL else {
+            completion(.failure(.baseURLError))
+            return
+        }
+
+        url.append(path: apiComponent)
+        url.append(path: randomComponent)
+
+        guard let builtURL = URLComponents(
+            url: url,
+            resolvingAgainstBaseURL: true
+        )?.url else {
+            completion(.failure(.builtURLError))
+            return
+        }
+
+        print("[QuoteManager] Random URL: \(builtURL.absoluteString)")
+
+        URLSession.shared.dataTask(with: builtURL) { data, response, error in
+            if let error = error {
+                completion(.failure(.invalidData(error.localizedDescription)))
+                return
+            }
+
+            guard let response = response as? HTTPURLResponse,
+                  response.statusCode == 200 else {
+                completion(.failure(.statusCode))
+                return
+            }
+
+            guard let data = data else {
+                completion(.failure(.noData))
+                return
+            }
+
+            do {
+                let quotes = try JSONDecoder().decode([Quote].self, from: data)
+
+                guard let firstQuote = quotes.first else {
+                    completion(.failure(.unableToDecode))
+                    return
+                }
+
+                completion(.success(firstQuote))
+            } catch {
+                print(error)
+                completion(.failure(.unableToDecode))
+            }
+        }.resume()
     }
     
 }
